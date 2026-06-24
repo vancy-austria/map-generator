@@ -1,0 +1,413 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f7f2;
+  --panel: #ffffff;
+  --ink: #1f2a24;
+  --muted: #66756c;
+  --line: #d8e0d8;
+  --accent: #2f7d50;
+  --accent-dark: #215a3a;
+  --warn: #9d4d2b;
+  --shadow: 0 10px 30px rgba(36, 55, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+button.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+button.danger {
+  color: var(--warn);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  padding: 7px 9px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  backdrop-filter: blur(12px);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.header-actions,
+.pool-controls,
+.property-row,
+.sheet-tools,
+.map-tools {
+  display: flex;
+  gap: 8px;
+}
+
+.property-row {
+  margin-bottom: 8px;
+}
+
+.header-actions button, .export-footer button {
+  padding: 10px 20px;
+}
+
+.layer-select-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sheet-tools label,
+.map-tools label {
+  min-width: 130px;
+}
+
+.zoom-value {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 300px minmax(420px, 1fr) 330px;
+  gap: 16px;
+  padding: 16px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.sidebar {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  padding: 16px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+section h2,
+.section-title h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.section-title p,
+.hint {
+  margin: 0 0 8px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.file-drop {
+  min-height: 72px;
+  place-items: center;
+  border: 1px dashed var(--accent);
+  border-radius: 8px;
+  color: var(--accent-dark);
+  cursor: pointer;
+}
+
+.file-drop.drag-over {
+  background: #edf7ef;
+  border-style: solid;
+}
+
+.file-drop input {
+  display: none;
+}
+
+.sheet-list,
+.pool-summary,
+.property-list,
+.layer-controls {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.sheet-list {
+  text-align: center;
+}
+
+.sheet-item,
+.pool-item,
+.property-item,
+.layer-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fbfcfa;
+}
+
+.pool-item {
+  display: grid;
+  grid-template-columns: 1fr 36px;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  width: 34px;
+  min-height: 34px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+}
+
+.icon-button svg {
+  width: 17px;
+  height: 17px;
+  pointer-events: none;
+}
+
+.sheet-item {
+  cursor: pointer;
+}
+
+.sheet-item.active {
+  border-color: var(--accent);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.empty,
+.empty-state {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.workspace {
+  display: grid;
+  gap: 16px;
+  grid-template-rows: minmax(260px, 38vh) minmax(360px, 1fr);
+}
+
+.sheet-editor,
+.map-panel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sheet-canvas-wrap {
+  position: relative;
+  height: calc(100% - 65px);
+  overflow: auto;
+  background: #edf2ec;
+}
+
+#sheetCanvas {
+  display: block;
+  image-rendering: pixelated;
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+}
+
+#mapCanvas {
+  display: block;
+  background: #dfe7de;
+  image-rendering: pixelated;
+}
+
+.map-canvas-wrap {
+  height: calc(100% - 65px);
+  overflow: auto;
+  background: #dfe7de;
+}
+
+.layer-card {
+  display: grid;
+  gap: 8px;
+}
+
+.layer-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.layer-card .row {
+  display: grid;
+  grid-template-columns: 1fr 82px;
+  gap: 8px;
+}
+
+textarea {
+  height: 220px;
+  resize: vertical;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+}
+
+@media (max-width: 1120px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace {
+    grid-template-rows: 360px 520px;
+  }
+}
+
+@media (max-width: 640px) {
+.app-header,
+  .header-actions,
+  .property-row,
+  .sheet-tools,
+  .map-tools,
+  .pool-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .app-shell {
+    padding: 10px;
+  }
+}
+
+.section-title {
+  display: grid;
+  grid-template-columns: 1fr 220px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+#visibleLayer, #resetSelected {
+  width: 180px;
+  min-width: 180px;
+  max-width: 180px;
+}
+
+.map-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: 0;
+}
+
+.map-tools label,
+.sheet-tools label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: auto;
+  white-space: nowrap;
+}
+
+#resizeMap {
+  width: 100%;
+}
+
+.property-item {
+  display: grid;
+  grid-template-columns: 1fr 36px;
+  align-items: center;
+  gap: 8px;
+}
+
+.export-footer {
+  margin: 0 16px 16px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.export-footer textarea {
+  width: 100%;
+  height: 220px;
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--line);
+}
+
+.footer-actions {
+  margin-bottom: 10px;
+}

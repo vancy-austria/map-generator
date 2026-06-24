@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiled TMX Map Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <div>
+      <h1>Tiled TMX Map Generator</h1>
+      <p class="eyebrow">Start at Step 1.</p>
+    </div>
+    <div class="header-actions">
+      <button id="clearMap">Clear Map</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="panel sidebar">
+      <section>
+        <h2>1. Spritesheets</h2>
+        <label id="fileDrop" class="file-drop">
+          <input id="sheetUpload" type="file" accept="image/png,image/jpeg,image/webp" multiple />
+          <span>Upload or drop spritesheets</span>
+        </label>
+        <div id="sheetList" class="sheet-list empty">No sheets loaded yet.</div>
+      </section>
+
+      <section>
+        <h2>2. Project</h2>
+        <div class="form-grid">
+          <label>
+            Map Name
+            <input id="mapName" value="generated-map" />
+          </label>
+          <label>
+            Width
+            <input id="mapWidth" type="number" min="4" max="256" value="32" />
+          </label>
+          <label>
+            Height
+            <input id="mapHeight" type="number" min="4" max="256" value="24" />
+          </label>
+          <label>
+            Tile Size (px)
+            <input id="tileSize" type="number" min="8" max="64" value="16" />
+          </label>
+        </div>
+        <button id="resizeMap" class="primary">Apply Map</button>
+      </section>
+
+      <section>
+        <h2>3. Tile Pools</h2>
+        <p class="hint">Select cells in "Mark Spritesheet" map, choose a layer (e.g. ground) and then press "Assign
+          Selection". One selection = 1 object</p>
+        <div class="pool-controls">
+          <select id="poolSelect">
+            <option value="Ground">Ground</option>
+            <option value="GroundDecoration">GroundDecoration</option>
+            <option value="Buildings">Buildings</option>
+            <option value="Decoration">Decoration</option>
+            <option value="Interactable">Interactable</option>
+          </select>
+          <button id="assignSelected" class="primary">Assign Selection</button>
+        </div>
+        <div id="poolSummary" class="pool-summary"></div>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="panel sheet-editor">
+        <div class="section-title">
+          <div>
+            <h2>Mark Spritesheet</h2>
+            <p>Click or drag adjacent cells, then assign them as one object.</p>
+          </div>
+          <div>
+            <button id="resetSelected" class="primary">Reset Selection</button>
+          </div>
+          <div class="map-tools">
+            <label>
+              Zoom
+              <input id="sheetZoom" type="range" min="1" max="6" step="1" value="2" />
+            </label>
+            <span id="sheetZoomValue" class="zoom-value">200%</span>
+            <button id="resetZoom">Reset Zoom</button>
+          </div>
+        </div>
+        <div id="sheetCanvasWrap" class="sheet-canvas-wrap">
+          <canvas id="sheetCanvas"></canvas>
+          <div id="sheetEmpty" class="empty-state">Load a spritesheet to mark tiles.</div>
+        </div>
+      </div>
+
+      <div class="panel map-panel">
+        <div class="section-title">
+          <div>
+            <h2>Map Preview</h2>
+            <p>Generate and remove layers individually.</p>
+          </div>
+          <div>
+            <select id="visibleLayer">
+              <option value="all">All Layers</option>
+              <option value="Ground">Ground</option>
+              <option value="GroundDecoration">GroundDecoration</option>
+              <option value="Buildings">Buildings</option>
+              <option value="Decoration">Decoration</option>
+              <option value="Interactable">Interactable</option>
+            </select>
+          </div>
+          <div class="map-tools">
+            <label>
+              Zoom
+              <input id="mapZoom" type="range" min="1" max="6" step="1" value="1" />
+            </label>
+            <span id="mapZoomValue" class="zoom-value">100%</span>
+            <button id="resetMapZoom">Reset Zoom</button>
+          </div>
+        </div>
+        <div class="map-canvas-wrap">
+          <canvas id="mapCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel sidebar">
+      <section>
+        <h2>4. Layer Generator</h2>
+        <div id="layerControls" class="layer-controls"></div>
+      </section>
+
+      <section>
+        <h2>5. Interactables - Add Property</h2>
+        <p class="hint">Interactable tiles are exported as an object layer with properties.</p>
+
+        <div class="property-row">
+          <input id="propertyName" placeholder="property" />
+          <select id="propertyType">
+            <option value="bool">bool</option>
+            <option value="int">int</option>
+            <option value="float">float</option>
+            <option value="string">string</option>
+          </select>
+          <input id="propertyValue" placeholder="true" />
+        </div>
+        <div class="pool-controls">
+          <input id="objectName" placeholder="Object name, e.g. pot" />
+
+          <button id="addProperty" class="primary">Add</button>
+        </div>
+        <div id="propertyList" class="property-list empty">No properties yet.</div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="export-footer panel">
+    <div class="footer-actions">
+      <h2>6. Export</h2>
+      <button id="exportTmx" class="primary">Export TMX</button>
+    </div>
+
+    <textarea id="tmxOutput" readonly placeholder="The exported TMX appears here."></textarea>
+  </footer>
+  <script src="app.js"></script>
+</body>
+
+</html>
